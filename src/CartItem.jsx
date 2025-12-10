@@ -52,6 +52,8 @@ const CartItem = ({ onContinueShopping }) => {
     return parseFloat(item.cost.substring(1))*item.quantityntity
   };
 
+  dispatch(removeItem(item.name));
+
   return (
     <div className="cart-container">
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
