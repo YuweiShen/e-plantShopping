@@ -4,6 +4,7 @@ export const CartSlice = createSlice({
   name: 'cart',
   initialState: {
     items: [], // Initialize items as an empty array
+    numOfItems: 0,
   },
   reducers: {
     addItem: (state, action) => {
@@ -17,15 +18,24 @@ export const CartSlice = createSlice({
             // If item does not exist, add it to the cart with quantity 1
             state.items.push({ name, image, cost, quantity: 1 });
             }
+        state.numOfItems ++;
     },
     removeItem: (state, action) => {
         state.items = state.items.filter(item => item.name !== action.payload);
+        state.numOfItems -= quantity;
+
+            // Just to be sure... I hate negative numbers
+            if (state.numOfItems < 0) {
+                state.numOfItems = 0;
+            }
     },
     updateQuantity: (state, action) => {
         const { name, quantity } = action.payload; // Destructure the product name and new quantity from the action payload
         // Find the item in the cart that matches the given name
         const itemToUpdate = state.items.find(item => item.name === name);
         if (itemToUpdate) {
+        const differenceQuantity = quantity - itemToUpdate.quantity;
+        state.numOfItems += differenceQuantity;
         itemToUpdate.quantity = quantity; // If the item is found, update its quantity to the new value
         }
     },
