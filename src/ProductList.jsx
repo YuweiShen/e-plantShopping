@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
-import addItem from './CartSlice.jsx';
+import { addItem } from './CartSlice.jsx';
 import {useSelector, useDispatch} from 'react-redux'
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
@@ -256,7 +256,8 @@ function ProductList({ onHomeClick }) {
     const handleContinueShopping = (e) => {
         e.preventDefault();
         setShowCart(false);
-
+    } ; 
+    
     const handleAddToCart = (product) => {
         dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
         
@@ -270,7 +271,6 @@ function ProductList({ onHomeClick }) {
 
     const calculateTotalQuantity = () => {
         return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
-    };
     };
     return (
         <div>

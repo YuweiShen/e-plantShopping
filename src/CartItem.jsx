@@ -57,6 +57,11 @@ const CartItem = ({ onContinueShopping }) => {
     alert('Functionality to be added for future reference');
   };
 
+  // Helper function to parse cost string to number
+  const parseItemCostToInteger = (costString) => {
+    return parseFloat(costString.substring(1));
+  };
+
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
     let totalCost = 0;
